@@ -23,6 +23,10 @@
     Buy now
 </a>
 
-<x-paddle />
+{{--<x-paddle />--}}
+
+<x-paddle-button :url="$payLink" class="px-8 py-4" data-theme='dark'>
+    Subscribe
+</x-paddle-button>
 </body>
 </html>

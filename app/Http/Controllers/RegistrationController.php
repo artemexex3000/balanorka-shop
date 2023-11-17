@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use SebastianBergmann\Diff\Exception;
 
 class RegistrationController extends Controller
@@ -22,14 +23,23 @@ class RegistrationController extends Controller
     public function store(Request $request)
     {
         try {
-            return User::create([
-                'username' => $request->string('username'),
-                'name' => $request->string('name'),
-                'email' => $request->string('email'),
-                'password' => $request->string('password')
+            $credentials = $request->validate([
+                'username' => 'required|unique:users,username',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required',
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'address' => 'required',
+                'telephone' => 'required',
             ]);
-        } catch (Exception $e) {
-            return $e->getMessage();
+
+            if (!User::create($credentials)) {
+                return 0;
+            }
+
+            return 1;
+        } catch (ValidationException $exception) {
+            return $exception->getMessage();
         }
     }
 

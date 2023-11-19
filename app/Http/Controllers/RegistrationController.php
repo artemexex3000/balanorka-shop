@@ -9,12 +9,18 @@ use SebastianBergmann\Diff\Exception;
 
 class RegistrationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return csrf_token();
+        return "Here u can sign up to the web site";
     }
 
     /**

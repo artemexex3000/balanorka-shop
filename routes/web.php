@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SessionController;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Validation\ValidationException;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +16,8 @@ use Illuminate\Validation\ValidationException;
 |
 */
 
-Route::apiResource('signup', RegistrationController::class)->middleware('guest');
-Route::apiResource('session', SessionController::class)->middleware('guest');
-
-Route::post('session/logout', [SessionController::class, 'logout'])->middleware('auth');
-
-Route::get('csrf', function () {
-    return csrf_token();
-});
+Route::resource('signup', RegistrationController::class)->only(['index', 'store']);
+Route::resource('session', SessionController::class)->only(['index', 'store', 'logout']);
 
 Route::get('/', function (Request $request) {
 
@@ -34,12 +26,19 @@ Route::get('/', function (Request $request) {
             ->returnTo('/')
             ->create();
 
-        return view('welcome', ['payLink' => $payLink]);
+        return view('app', ['payLink' => $payLink]);
     }
 
     return 0;
 });
 
-Route::get('test', function () {
+Route::get('csrf', function () {
+    return csrf_token();
+});
+Route::get('auth', function () {
     return auth()->check();
+});
+
+Route::get('/home', function () {
+    return view('app');
 });

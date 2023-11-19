@@ -6,12 +6,19 @@ use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['logout']);
+        $this->middleware('guest')->except(['logout']);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return "Here u can sign in.";
     }
 
     /**
@@ -24,7 +31,7 @@ class SessionController extends Controller
             'password' => 'required',
         ]);
 
-        if (! auth()->attempt($credentials)) {
+        if (!auth()->attempt($credentials)) {
             return "There is no existing user with provided credentials";
         }
 
@@ -57,7 +64,8 @@ class SessionController extends Controller
 
     }
 
-    public function logout() {
+    public function logout()
+    {
         if (!auth()->check()) {
             return "You are a guest!";
         }

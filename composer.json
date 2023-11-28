@@ -12,7 +12,6 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
-        "livewire/volt": "^1.0",
         "moneyphp/money": "^4.3"
     },
     "require-dev": {

@@ -35,8 +35,6 @@ class RegistrationController extends Controller
                 'password' => 'required|confirmed',
                 'first_name' => 'required',
                 'last_name' => 'required',
-                'address' => 'required',
-                'telephone' => 'required',
             ]);
 
             if (!User::create($credentials)) {

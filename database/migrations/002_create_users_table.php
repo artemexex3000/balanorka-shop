@@ -13,16 +13,12 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('cart_items_id')
-                ->constrained('cart_items')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
             $table->string('username')
                 ->unique();
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('address');
-            $table->integer('telephone');
+            $table->string('address')->nullable();
+            $table->integer('telephone')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

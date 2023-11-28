@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Paddle\Cashier;
-use Laravel\Paddle\Receipt;
-use Laravel\Paddle\Subscription;
+use Laravel\Cashier\Cashier;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Model::unguard();
     }
 
     /**
@@ -22,7 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Cashier::useReceiptModel(Receipt::class);
-        Cashier::useSubscriptionModel(Subscription::class);
+        //
     }
 }

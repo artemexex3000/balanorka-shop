@@ -16,7 +16,7 @@ class SessionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function create()
     {
         return "Here u can sign in.";
     }

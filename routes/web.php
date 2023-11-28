@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\SessionController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,29 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('signup', RegistrationController::class)->only(['index', 'store']);
-Route::resource('session', SessionController::class)->only(['index', 'store', 'logout']);
+Route::view('/', 'welcome');
 
-Route::get('/', function (Request $request) {
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
-    if (auth()->check()) {
-        $payLink = $request->user()->newSubscription('default', $premium = 34567)
-            ->returnTo('/')
-            ->create();
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
 
-        return view('app', ['payLink' => $payLink]);
-    }
-
-    return 0;
-});
-
-Route::get('csrf', function () {
-    return csrf_token();
-});
-Route::get('auth', function () {
-    return auth()->check();
-});
-
-Route::get('/home', function () {
-    return view('app');
-});
+require __DIR__.'/auth.php';

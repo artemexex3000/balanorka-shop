@@ -18,9 +18,9 @@ class RegistrationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function create()
     {
-        return "Here u can sign up to the web site";
+        return view('register.create');
     }
 
     /**
@@ -32,7 +32,7 @@ class RegistrationController extends Controller
             $credentials = $request->validate([
                 'username' => 'required|unique:users,username',
                 'email' => 'required|email|unique:users,email',
-                'password' => 'required',
+                'password' => 'required|confirmed',
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'address' => 'required',

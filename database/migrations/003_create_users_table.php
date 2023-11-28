@@ -13,6 +13,10 @@ return new class extends Migration {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('cart_items_id')
+                ->constrained('cart_items')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
             $table->string('username')
                 ->unique();
             $table->string('first_name');

@@ -31,13 +31,14 @@ class RegistrationController extends Controller
     public function store(UserService $userService, StoreUserRequest $request)
     {
         $data = $request->validated();
-        $userService->createUser(
-            $data['username'],
-            $data['email'],
-            $data['first_name'],
-            $data['last_name'],
-            $data['password'],
-        );
+        return
+            $userService->create(
+                $data['username'],
+                $data['email'],
+                $data['first_name'],
+                $data['last_name'],
+                $data['password'],
+            );
     }
 
     /**

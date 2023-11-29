@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-<div>
+<div class="m-10">
     {{ $slot }}
 </div>
 </body>

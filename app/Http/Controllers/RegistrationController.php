@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use SebastianBergmann\Diff\Exception;
@@ -20,31 +22,22 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        return view('register.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserService $userService, StoreUserRequest $request)
     {
-        try {
-            $credentials = $request->validate([
-                'username' => 'required|unique:users,username',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|confirmed',
-                'first_name' => 'required',
-                'last_name' => 'required',
-            ]);
-
-            if (!User::create($credentials)) {
-                return 0;
-            }
-
-            return 1;
-        } catch (ValidationException $exception) {
-            return $exception->getMessage();
-        }
+        $data = $request->validated();
+        $userService->createUser(
+            $data['username'],
+            $data['email'],
+            $data['first_name'],
+            $data['last_name'],
+            $data['password'],
+        );
     }
 
     /**

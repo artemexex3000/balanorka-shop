@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSessionRequest;
+use App\Services\UserService;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
@@ -24,20 +28,15 @@ class SessionController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSessionRequest $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required',
-        ]);
+        $data = $request->validated();
 
-        if (!auth()->attempt($credentials)) {
-            return "There is no existing user with provided credentials";
+        if (!Auth::attempt($data)) {
+            return "Couldn't attempt with provided credentials.";
         }
 
-        $request->session()->regenerate();
-
-        return "You have been logged in successfully";
+        return $request->session()->regenerate();
     }
 
     /**
@@ -66,12 +65,10 @@ class SessionController extends Controller
 
     public function logout()
     {
-        if (!auth()->check()) {
+        if (!Auth::check()) {
             return "You are a guest!";
         }
-
-        auth()->logout();
-
+        Auth::logout();
         return "You have successfully logged out!";
     }
 }

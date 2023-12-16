@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class StoreUserRequest extends FormRequest
+class StoreSessionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::check();
+        return true;
     }
 
     /**
@@ -23,11 +23,8 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => 'required|unique:users,username',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed',
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'username' => 'required|exists:users,username',
+            'password' => 'required',
         ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('api/', function () {
     return view('welcome');
 });
 
-Route::post('register', [RegistrationController::class, 'store']);
+Route::post('api/register/store', [RegistrationController::class, 'store']);
+Route::post('api/session/store', [SessionController::class, 'store']);
+Route::post('api/session/logout', [SessionController::class, 'logout']);
 
-//Route::resource();
+Route::get('api/test', function () {
+    return Auth::check();
+});

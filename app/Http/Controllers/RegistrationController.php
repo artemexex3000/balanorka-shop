@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
-use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
-use SebastianBergmann\Diff\Exception;
 
 class RegistrationController extends Controller
 {

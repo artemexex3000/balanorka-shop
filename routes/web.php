@@ -19,10 +19,13 @@ Route::get('api/', function () {
     return view('welcome');
 });
 
-Route::post('api/register/store', [RegistrationController::class, 'store']);
-Route::post('api/session/store', [SessionController::class, 'store']);
-Route::post('api/session/logout', [SessionController::class, 'logout']);
+Route::post('api/register/store', [RegistrationController::class, 'store'])->middleware('guest');
+Route::post('api/session/store', [SessionController::class, 'store'])->middleware('guest');
+Route::post('api/session/logout', [SessionController::class, 'logout'])->middleware('auth');
 
 Route::get('api/test', function () {
-    return Auth::check();
+    if (!Auth::check()) {
+        return 'You are not in session!';
+    }
+    return 'You are in session';
 });

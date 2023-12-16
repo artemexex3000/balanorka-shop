@@ -12,4 +12,9 @@ class Product extends Model
     public function cart_item() {
         return $this->hasOne(CartItem::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

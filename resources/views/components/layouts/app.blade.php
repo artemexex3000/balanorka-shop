@@ -7,11 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Balanorka Shop</title>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @vite('resources/css/app.css')
 </head>
 <body>
-<div class="m-10">
+<div>
     {{ $slot }}
 </div>
+<x-footer />
+<x-flash />
 </body>
 </html>

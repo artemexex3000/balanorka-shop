@@ -15,9 +15,9 @@ class ProductController extends Controller
         return Product::all();
     }
 
-    public function show(Request $request)
+    public function show($slug)
     {
-        return Product::findOrFail($request->get("id"));
+        return Product::findOrFail($slug);
     }
 
     public function store(ProductService $productService, Request $request)
@@ -28,9 +28,9 @@ class ProductController extends Controller
         return $productService->create(
             $user_id,
             $data['name'],
-//            $data['thumbnail'],
-//            $data['description'],
-//            $data['price']
+            $data['thumbnail'] ?? null,
+            $data['description'] ?? null,
+            $data['price'] ?? null,
         );
     }
 }

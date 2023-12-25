@@ -1,7 +1,8 @@
 <x-layouts.app>
     <div class="relative flex flex-col justify-center h-screen overflow-hidden">
         <div class="w-full p-16 m-auto rounded-md shadow-md lg:max-w-xl">
-            <form action="api/register/store" method="post" class="space-y-5">
+            <form action="/register" method="post" class="space-y-5">
+                @csrf
                 <div class="space-y-2">
                     <label for="label" class="ml-4">
                         <span class="text-base label-text">Email</span>

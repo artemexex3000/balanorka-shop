@@ -20,7 +20,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        return "Here u can sign in.";
+        return view('session.create');
     }
 
     /**
@@ -34,31 +34,9 @@ class SessionController extends Controller
             return "Couldn't attempt with provided credentials.";
         }
 
-        return $request->session()->regenerate();
-    }
+        $request->session()->regenerate();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy()
-    {
-
+        return redirect('/')->with('success', 'You have been entered to account!');
     }
 
     public function logout()

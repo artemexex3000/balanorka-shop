@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Route;
 /**
  * WEB
  */
-
 Route::get('/', function () {
     return view('overview');
 });
-Route::get('register', [RegistrationController::class, 'create']);
-Route::post('register/store', [RegistrationController::class, 'store'])->middleware('guest');
+Route::resource('register', RegistrationController::class)->only(['create', 'store']);
+Route::post('session/logout', [SessionController::class, 'logout'])->name('session.logout');
+Route::resource('session', SessionController::class)->only(['create', 'store']);
 
 /**
  * API

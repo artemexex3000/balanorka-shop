@@ -14,7 +14,7 @@
 <div>
     {{ $slot }}
 </div>
-<x-footer />
-<x-flash />
+<x-footer/>
+<x-flash/>
 </body>
 </html>

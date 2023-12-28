@@ -45,6 +45,6 @@ class SessionController extends Controller
             return "You are a guest!";
         }
         Auth::logout();
-        return "You have successfully logged out!";
+        return redirect('/')->with('success', 'You have successfully logged out!');
     }
 }

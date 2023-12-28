@@ -10,9 +10,14 @@ use Mockery\Exception;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        return Product::all();
+        return view("product.index", ['products' => Product::all()]);
     }
 
     public function show($slug)

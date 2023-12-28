@@ -10,7 +10,7 @@
                 <x-layouts.user-create name="password" type="password" required="*"/>
                 <x-layouts.user-create name="password_confirmation" type="password" required="*"/>
                 <div>
-                    <input type="submit" class="input input-bordered w-full input-primary"/>
+                    <input type="submit" value="Sign Up" class="input input-bordered w-full input-primary"/>
                 </div>
             </form>
             <div class="mt-4">

@@ -15,6 +15,8 @@ Route::resource('register', RegistrationController::class)->only(['create', 'sto
 Route::post('session/logout', [SessionController::class, 'logout'])->name('session.logout');
 Route::resource('session', SessionController::class)->only(['create', 'store']);
 
+Route::resource('product', ProductController::class);
+
 /**
  * API
  */
@@ -26,8 +28,8 @@ Route::post('api/register/store', [RegistrationController::class, 'store'])->mid
 Route::post('api/session/store', [SessionController::class, 'store'])->middleware('guest');
 Route::post('api/session/logout', [SessionController::class, 'logout'])->middleware('auth');
 
-Route::get('api/products', [ProductController::class, 'index']);
-Route::get('api/products/{slug}', [ProductController::class, 'show']);
+Route::get('api/product', [ProductController::class, 'index']);
+Route::get('api/product/{slug}', [ProductController::class, 'show']);
 Route::post('api/products/add', [ProductController::class, 'store'])->middleware('auth');
 
 Route::get('api/test', function () {

@@ -6,7 +6,7 @@
                 <x-layouts.user-create name="username" type="text" />
                 <x-layouts.user-create name="password" type="password"/>
                 <div>
-                    <input type="submit" class="input input-bordered w-full input-primary"/>
+                    <input type="submit" value="Sign In" class="input input-bordered w-full input-primary"/>
                 </div>
             </form>
             <div class="mt-4">

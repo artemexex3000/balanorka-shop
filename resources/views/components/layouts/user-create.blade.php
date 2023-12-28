@@ -1,7 +1,7 @@
 @props([
     'name',
     'type' => 'text',
-    'required' => ''
+    'required' => '',
     ])
 
 <div class="space-y-2">
@@ -14,5 +14,5 @@
            value="{{ old($name) }}"
            class="input input-bordered w-full input-primary"/>
 
-    <x-forms.error name="name"/>
+    <x-forms.error name="{{ $name }}"/>
 </div>

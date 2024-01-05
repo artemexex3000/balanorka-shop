@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -22,20 +23,22 @@ class ProductController extends Controller
 
     public function show($slug)
     {
-        return Product::findOrFail($slug);
+        return view("product.show", ['product' => Product::findOrFail($slug)]);
     }
 
-    public function store(ProductService $productService, Request $request)
+    public function store(ProductService $productService, StoreProductRequest $request)
     {
         $user_id = Auth::id();
-        $data = $request->all();
+        $data = $request->validated();
 
-        return $productService->create(
+        $productService->create(
             $user_id,
             $data['name'],
             $data['thumbnail'] ?? null,
             $data['description'] ?? null,
             $data['price'] ?? null,
         );
+
+        return redirect('/')->with('success', 'You have posted new product successfully');
     }
 }

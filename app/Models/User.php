@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
@@ -52,7 +53,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
     protected function firstName(): Attribute
     {
         return Attribute::set(
@@ -67,11 +67,11 @@ class User extends Authenticatable
         );
     }
 
-    public function cart_items() {
+    public function cart_items(): HasMany {
         return $this->hasMany(CartItem::class);
     }
 
-    public function products() {
+    public function products(): HasMany {
         return $this->hasMany(Product::class);
     }
 }

@@ -30,7 +30,7 @@ Route::post('api/session/logout', [SessionController::class, 'logout'])->middlew
 
 Route::get('api/product', [ProductController::class, 'index']);
 Route::get('api/product/{slug}', [ProductController::class, 'show']);
-Route::post('api/products/add', [ProductController::class, 'store'])->middleware('auth');
+Route::post('api/product/add', [ProductController::class, 'store'])->middleware('auth');
 
 Route::get('api/test', function () {
     if (!Auth::check()) {

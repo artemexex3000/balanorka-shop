@@ -1,55 +1,18 @@
 @props(['product'])
 
-<article {!! $attributes->merge(['class' => "transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl"])!!}>
-    <div class="py-6 px-5">
-        {{--        @if(isset($product->thumbnail))--}}
-        <div>
-            <img src="/storage/{{ $product->thumbnail }}" alt="Blog Post illustration" class="rounded-xl">
-        </div>
-        {{--        @endif--}}
-
-        <div class="mt-8 flex flex-col justify-between">
-            <header>
-{{--                <div class="space-x-2">--}}
-{{--                    <x-category-button :category="$product->category"/>--}}
-{{--                </div>--}}
-
-                <div class="mt-4">
-                    <h1 class="text-3xl">
-                        <a href="/product/{!! $product->id !!}">
-                            {!! $product->name !!}
-                        </a>
-                    </h1>
-
-                    <span class="mt-2 block text-gray-400 text-xs">
-                                        Published <time>{!! $product->created_at->diffForHumans() !!}</time>
-                                    </span>
-                </div>
-            </header>
-
-            <div class="text-sm mt-4">
-                <p>
-                    {!! $product->description !!}
-                </p>
+<article {!! $attributes->merge(['class' => "transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-5 hover:border-opacity-5 rounded-xl"])!!}>
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes"/></figure>
+        <div class="card-body">
+            <h2 class="card-title">
+                {{ $product->name }}
+                <div class="badge badge-secondary">NEW</div>
+            </h2>
+            <p>{{ $product->description }}</p>
+            <div class="card-actions justify-end">
+                <div class="badge badge-outline">Fashion</div>
+                <div class="badge badge-outline">Products</div>
             </div>
-
-            <footer class="flex justify-between items-center mt-8">
-                <div class="flex items-center text-sm">
-                    <img src="{{ $product->thumbnail }}" alt="Lary avatar">
-                    <div class="ml-3">
-                        <a href="/?author={!! $product->user->username !!}">
-                            <h5 class="font-bold">{!! $product->user->first_name !!}</h5>
-                        </a>
-                        <h6>Mascot at Laracasts</h6>
-                    </div>
-                </div>
-
-                <div>
-                    <a href="/product/{!! $product->id !!}"
-                       class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8"
-                    >Read More</a>
-                </div>
-            </footer>
         </div>
     </div>
 </article>

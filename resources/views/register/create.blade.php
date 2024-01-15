@@ -13,11 +13,7 @@
                     <input type="submit" value="Sign Up" class="input input-bordered w-full input-primary"/>
                 </div>
             </form>
-            <div class="mt-4">
-                <button class="btn">
-                    <a href="/session/create">Already have account? Sign in!</a>
-                </button>
-            </div>
+            <x-button href="/session/create" text="Already have account? Sign in!"/>
         </div>
     </div>
 </x-layouts.app>

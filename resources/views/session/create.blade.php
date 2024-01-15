@@ -9,11 +9,7 @@
                     <input type="submit" value="Sign In" class="input input-bordered w-full input-primary"/>
                 </div>
             </form>
-            <div class="mt-4">
-                <button class="btn">
-                    <a href="/register/create">Don't have an account? Sign out!</a>
-                </button>
-            </div>
+            <x-button href="/register/create" text="Don't have an account? Sign out!"/>
         </div>
     </div>
 </x-layouts.app>

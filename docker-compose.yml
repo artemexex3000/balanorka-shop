@@ -1,0 +1,61 @@
+version: '3.3'
+
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: nginx.dockerfile
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/html
+        depends_on:
+            - php_fpm
+    php_fpm:
+        build:
+            context: .
+            dockerfile: php.dockerfile
+        command: 'php artisan serve --host=0.0.0.0 && npm run dev'
+        volumes:
+            - ./:/var/www/html
+        depends_on:
+            - npm
+            - db_pgsql
+        ports:
+            - "8000:8000"
+    db_pgsql:
+        image: postgres:14.10-alpine
+        restart: always
+        ports:
+            - "5432:5432"
+        env_file:
+            - ./.env
+        environment:
+            POSTGRES_DB: ${DB_DATABASE}
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./postgresql:/var/lib/postgresql/data
+    artisan:
+        build:
+            context: .
+            dockerfile: php.dockerfile
+        volumes:
+            - ./:/var/www/html
+        working_dir: /var/www/html
+        depends_on:
+            - db_pgsql
+        entrypoint: [ "php", "/var/www/html/artisan" ]
+    npm:
+        image: node:21.2.0-alpine
+        volumes:
+            - ./:/var/www/html
+        entrypoint: [ "npm" ]
+        working_dir: /var/www/html
+networks:
+    laravel-exa:
+        driver: bridge
+
+volumes:
+    db_pgsql:
+        driver: local

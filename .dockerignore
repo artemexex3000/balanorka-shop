@@ -1,0 +1,4 @@
+./docker-compose.yml
+./php.dockerfile
+./nginx.dockerfile
+./postgresql
